@@ -57,7 +57,7 @@ function createScene() {
 
     scene.add(new THREE.AxisHelper(10));
 
-    createTable(0, 0, 0);
+    createTable(40, -2, 20);
 }
 
 function createCamera() {
@@ -66,9 +66,9 @@ function createCamera() {
                                          window.innerWidth / window.innerHeight,
                                          1,
                                          1000);
-    camera.position.x = 50;
-    camera.position.y = 50;
-    camera.position.z = 50;
+    camera.position.x = 100;
+    camera.position.y = 100;
+    camera.position.z = 100;
     camera.lookAt(scene.position);
 }
 
