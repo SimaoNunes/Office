@@ -4,17 +4,56 @@ var camera, scene, renderer;
 
 var geometry, material, mesh;
 
+var table;
+
+function addTableTop(obj, x, y, z) {
+    'use strict';
+    geometry = new THREE.CubeGeometry(80, 4, 40);
+    mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(x, y, z);
+    obj.add(mesh);
+}
+
+
+function createTable(x, y, z) {
+    'use strict';
+
+    table = new THREE.Object3D();
+
+    material = new THREE.MeshBasicMaterial({ color: 0x7c5100, wireframe: true });
+
+    addTableTop(table, 0, 0, 0);
+
+    scene.add(table);
+
+    table.position.x = x;
+    table.position.y = y;
+    table.position.z = z;
+}
+
+
 function createScene() {
     'use strict';
 
     scene = new THREE.Scene();
 
     scene.add(new THREE.AxisHelper(10));
+
+    createTable(0, 0, 0);
+
 }
 
 function createCamera() {
     'use strict';
-    camera = new THREE.OrthographicCamera(100,100,100,100);
+    camera = new THREE.OrthographicCamera(
+        innerWidth / - 2,
+        innerWidth / 2,
+        innerHeight / 2,
+        innerHeight / - 2,
+        1,
+        1000
+    );
+    scene.add( camera );
 }
 
 function render() {
