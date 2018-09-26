@@ -39,8 +39,8 @@ function createTable(x, y, z) {
     material = new THREE.MeshBasicMaterial({ color: 0x7c5100, wireframe: true });
 
     addTableTop(table, 0, 0, 0);
-    addTableLeg(table, 35, -14, 14);
-    addTableLeg(table, 35, -14, -14);
+    addTableLeg(table, 37.5, -14, 17.5);
+    addTableLeg(table, 37.5, -14, -17.5);
     addTableBox(table, -27.5, -14, 0);
 
     scene.add(table);
