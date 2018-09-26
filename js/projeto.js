@@ -32,8 +32,8 @@ function createTable(x, y, z) {
     addTableTop(table, 0, 0, 0);
     addTableLeg(table, 37.5, -14, 17.5);
     addTableLeg(table, 37.5, -14, -17.5);
-    addTableLeg(table, -37.5, 14, 17.5);
-    addTableLeg(table, -37.5, 14, -17.5);
+    addTableLeg(table, -37.5, -14, 17.5);
+    addTableLeg(table, -37.5, -14, -17.5);
 
     scene.add(table);
 
@@ -56,12 +56,12 @@ function createScene() {
 function createCamera() {
     'use strict';
     camera = new THREE.OrthographicCamera(
-        innerWidth / - 2,
-        innerWidth / 2,
-        innerHeight / 2,
-        innerHeight / - 2,
-        1,
-        1000
+        -40,
+        40,
+        40,
+        -40,
+        -20,
+        20
     );
     scene.add( camera );
 }
