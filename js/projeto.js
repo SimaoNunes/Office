@@ -30,10 +30,10 @@ function createTable(x, y, z) {
     material = new THREE.MeshBasicMaterial({ color: 0x474747, wireframe: true });
 
     addTableTop(table, 0, 0, 0);
-    // addTableLeg(table, 37.5, -14, 17.5);
-    // addTableLeg(table, 37.5, -14, -17.5);
-    // addTableLeg(table, -37.5, 14, 17.5);
-    // addTableLeg(table, -37.5, 14, -17.5);
+    addTableLeg(table, 37.5, -14, 17.5);
+    addTableLeg(table, 37.5, -14, -17.5);
+    addTableLeg(table, -37.5, -14, 17.5);
+    addTableLeg(table, -37.5, -14, -17.5);
 
     scene.add(table);
 
@@ -42,6 +42,19 @@ function createTable(x, y, z) {
     table.position.z = z;
 }
 
+function onResize() {
+    'use strict';
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    if (window.innerHeight > 0 && window.innerWidth > 0) {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    }
+
+}
+
+
 function createScene() {
     'use strict';
 
@@ -49,22 +62,29 @@ function createScene() {
 
     scene.add(new THREE.AxisHelper(10));
 
-    createTable(0, 0, 0);
+    createTable(0, 0, 10);
 
 }
+
 
 function createCamera() {
     'use strict';
     camera = new THREE.OrthographicCamera(
-        innerWidth/2,
-        innerWidth/2,
-        innerHeight/2,
-        innerHeight/2,
-        1,
+        -50,
+        50,
+        40,
+        -40,
+        -1000,
         1000
     );
+    
+    camera.position.x = 35;
+    camera.position.y = 20;
+    camera.position.z = 60;    
+
     scene.add( camera );
 }
+
 
 function render() {
     'use strict';
@@ -83,12 +103,17 @@ function init() {
     createCamera();
 
     render();
+
+    window.addEventListener("resize", onResize);
+
 }
 
 function animate() {
     'use strict';
 
     render();
+
+    camera.lookAt( scene.position );
 
     requestAnimationFrame(animate);
 }
