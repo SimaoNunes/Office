@@ -1,4 +1,4 @@
-/*Trabalho 1, Cena Simples Interativa com Câmara Fixa*/
+/*Primeira entrega, Cena Simples Interativa com Câmara Fixa*/
 
 var camera, scene, renderer;
 
@@ -14,10 +14,7 @@ function createScene() {
 
 function createCamera() {
     'use strict';
-    camera = new THREE.OrthographicCamera(100,
-                                         100,
-                                         100,
-                                         100);
+    camera = new THREE.OrthographicCamera(100,100,100,100);
 }
 
 function render() {
