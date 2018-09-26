@@ -20,7 +20,7 @@ function createTable(x, y, z) {
 
     table = new THREE.Object3D();
 
-    material = new THREE.MeshBasicMaterial({ color: 0x7c5100, wireframe: true });
+    material = new THREE.MeshBasicMaterial({ color: 0x474747, wireframe: true });
 
     addTableTop(table, 0, 0, 0);
 
@@ -46,10 +46,10 @@ function createScene() {
 function createCamera() {
     'use strict';
     camera = new THREE.OrthographicCamera(
-        innerWidth / - 2,
-        innerWidth / 2,
-        innerHeight / 2,
-        innerHeight / - 2,
+        100,
+       100,
+        100,
+100,
         1,
         1000
     );
