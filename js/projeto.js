@@ -6,6 +6,39 @@ var geometry, material, mesh;
 
 var table, chair, lamp;
 
+function addChairSeat(obj, x, y, z) {
+    'use strict';
+    geometry = new THREE.CubeGeometry(30, 3, 30);
+    mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(x, y, z);
+    obj.add(mesh);
+}
+
+function addChairBack(obj, x, y, z) {
+    'use strict';
+    geometry = new THREE.CubeGeometry(30, 45, 3);
+    mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(x, y, z);
+    obj.add(mesh);
+}
+
+function createChair(x, y, z) {
+    'use strict';
+
+    chair = new THREE.Object3D();
+
+    material = new THREE.MeshBasicMaterial({ color: 0xeddd36, wireframe: true });
+
+    addChairSeat(chair, 0, 0, 0);
+    addChairBack(chair, 0, 22.5, -16.5)
+
+    scene.add(chair);
+
+    chair.position.x = x;
+    chair.position.y = y;
+    chair.position.z = z;
+}
+
 function addTableLeg(obj, x, y, z) {
     'use strict';
     geometry = new THREE.CylinderGeometry(2.5, 2.5, 25);
@@ -63,6 +96,7 @@ function createScene() {
     scene.add(new THREE.AxisHelper(10));
 
     createTable(0, 0, 10);
+    createChair(0, 0, 20);
 
 }
 
@@ -70,21 +104,12 @@ function createScene() {
 function createCamera() {
     'use strict';
     camera = new THREE.OrthographicCamera(
-<<<<<<< HEAD
-        -40,
-        40,
-        40,
-        -40,
-        -20,
-        20
-=======
-        -50,
-        50,
-        40,
-        -40,
-        -1000,
-        1000
->>>>>>> 6beae1a9b9a22d0197e29b71dfbd53eb5db14519
+        -200,
+        200,
+        200,
+        -200,
+        -200,
+        200
     );
     
     camera.position.x = 35;
