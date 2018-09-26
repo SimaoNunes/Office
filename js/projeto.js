@@ -8,7 +8,6 @@ var table, chair, lamp;
 
 function addTableLeg(obj, x, y, z) {
     'use strict';
-
     geometry = new THREE.CylinderGeometry(2.5, 2.5, 25);
     mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(x, y, z);
