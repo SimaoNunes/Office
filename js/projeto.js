@@ -4,7 +4,20 @@ var camera, scene, renderer;
 
 var geometry, material, mesh;
 
+<<<<<<< HEAD
+var table, chair, lamp;
+
+function addTableLeg(obj, x, y, z) {
+    'use strict';
+
+    geometry = new THREE.CylinderGeometry(2.5, 2.5, 25);
+    mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(x, y, z);
+    obj.add(mesh);
+}
+=======
 var table;
+>>>>>>> 1a52af15458ab3acc56462875e95d5cec613abaf
 
 function addTableTop(obj, x, y, z) {
     'use strict';
@@ -14,7 +27,10 @@ function addTableTop(obj, x, y, z) {
     obj.add(mesh);
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1a52af15458ab3acc56462875e95d5cec613abaf
 function createTable(x, y, z) {
     'use strict';
 
@@ -23,6 +39,13 @@ function createTable(x, y, z) {
     material = new THREE.MeshBasicMaterial({ color: 0x474747, wireframe: true });
 
     addTableTop(table, 0, 0, 0);
+<<<<<<< HEAD
+    addTableLeg(table, 37.5, -14, 17.5);
+    addTableLeg(table, 37.5, -14, -17.5);
+    addTableLeg(table, -37.5, 14, 17.5);
+    addTableLeg(table, -37.5, 14, -17.5);
+=======
+>>>>>>> 1a52af15458ab3acc56462875e95d5cec613abaf
 
     scene.add(table);
 
@@ -31,7 +54,10 @@ function createTable(x, y, z) {
     table.position.z = z;
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1a52af15458ab3acc56462875e95d5cec613abaf
 function createScene() {
     'use strict';
 
@@ -45,6 +71,9 @@ function createScene() {
 
 function createCamera() {
     'use strict';
+<<<<<<< HEAD
+    camera = new THREE.OrthographicCamera(200,200,200,200);
+=======
     camera = new THREE.OrthographicCamera(
         100,
        100,
@@ -54,6 +83,7 @@ function createCamera() {
         1000
     );
     scene.add( camera );
+>>>>>>> 1a52af15458ab3acc56462875e95d5cec613abaf
 }
 
 function render() {
