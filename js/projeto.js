@@ -24,7 +24,7 @@ function addLampTorso(obj, x, y, z) {
 
 function addLampHead(obj, x, y, z) {
     'use strict';
-    geometry = new THREE.CylinderGeometry(1, 15, 15);
+    geometry = new THREE.CylinderGeometry(1, 15, 20);
     mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(x, y, z);
     obj.add(mesh);
@@ -39,7 +39,7 @@ function createLamp(x, y, z) {
 
     addLampBase(lamp, 55, -36, 0);
     addLampTorso(lamp, 55, 0.5, 0);
-    addLampHead(lamp, 55, 28, 0)
+    addLampHead(lamp, 55, 26, 0)
 
     scene.add(lamp);
 
@@ -213,10 +213,15 @@ function onKeyDown(e) {
         camera.position.y = 0;
         camera.position.z = 0;  
         break; 
-    case 53: // up
+    case 53: // 5
         camera.position.x = 30;
         camera.position.y = 5;
-        camera.position.z = 30;  
+        camera.position.z = 30;
+    case 37: // left
+        chair.rotation.y -= 0.1;  
+    case 39: // right
+        chair.rotation.y += 0.1;
+
     }
 }
 
