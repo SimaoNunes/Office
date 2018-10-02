@@ -217,10 +217,12 @@ function onKeyDown(e) {
         camera.position.x = 30;
         camera.position.y = 5;
         camera.position.z = 30;
-    case 37: // left
-        chair.rotation.y -= 0.1;  
+    case 37: // left  
+        chair.rotateY(3.14/100);
+        break;
     case 39: // right
-        chair.rotation.y += 0.1;
+        chair.rotateY((-1)*3.14/100);
+        break;
 
     }
 }
@@ -247,8 +249,6 @@ function init() {
     window.addEventListener("resize", onResize);
     window.addEventListener("keydown", onKeyDown);
     
-
-
 }
 
 function animate() {
