@@ -2,9 +2,9 @@ class Table extends THREE.Object3D{
     
     addTableLeg(x, y, z) {
         'use strict';
-        geometry = new THREE.CylinderGeometry(2.5, 2.5, 35);
+        geometry = new THREE.CylinderGeometry(2.5, 2.5, 35, 10);
         mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(x, y, z);
+        mesh.position.set(x, y-19.5, z);
         this.add(mesh);
     }
     
@@ -27,10 +27,10 @@ class Table extends THREE.Object3D{
 
         material = new THREE.MeshBasicMaterial({ color: 0x4c3000, wireframe: true });
 
-        this.addTableTop(0, -0.5, 0);
-        this.addTableLeg(37.5, -20, 17.5);
-        this.addTableLeg(37.5, -20, -17.5);
-        this.addTableLeg(-37.5, -20, 17.5);
-        this.addTableLeg(-37.5, -20, -17.5);
+        this.addTableTop(0, 0, 0);
+        this.addTableLeg(37.5, 0, 17.5);
+        this.addTableLeg(37.5, 0, -17.5);
+        this.addTableLeg(-37.5, 0, 17.5);
+        this.addTableLeg(-37.5, 0, -17.5);
     }
 }

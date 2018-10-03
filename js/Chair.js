@@ -1,14 +1,6 @@
 class Chair extends THREE.Object3D{
-    
-    addChairLeg( x, y, z) {
-        'use strict';
-        geometry = new THREE.CubeGeometry(3, 20, 3);
-        mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(x, y, z);
-        this.add(mesh);
-    }
 
-    addChairSeat( x, y, z) {
+    addChairSeat(x, y, z) {
         'use strict';
         geometry = new THREE.CubeGeometry(30, 3, 30);
         mesh = new THREE.Mesh(geometry, material);
@@ -16,27 +8,43 @@ class Chair extends THREE.Object3D{
         this.add(mesh);
     }
 
-    addChairBack( x, y, z) {
+    addChairBack(x, y, z) {
         'use strict';
         geometry = new THREE.CubeGeometry(30, 45, 3);
         mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(x, y, z);
+        mesh.position.set(x, y+21, z+16.5);
         this.add(mesh);
     }
 
-    addChairStandHor( x, y, z){
+    addChairLeg(x, y, z) {
+        'use strict';
+        geometry = new THREE.CubeGeometry(3, 20, 3);
+        mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(x, y-11.5, z);
+        this.add(mesh);
+    }
+
+    addChairStandHor(x, y, z){
         'use strict';
         geometry = new THREE.CubeGeometry(10, 2, 3);
         mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(x, y, z);
+        mesh.position.set(x, y-20.5, z);
         this.add(mesh);
     }
 
-    addChairStandVer( x, y, z){
+    addChairStandVer(x, y, z){
         'use strict';
         geometry = new THREE.CubeGeometry(3, 2, 10);
         mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(x, y, z);
+        mesh.position.set(x, y-20.5, z);
+        this.add(mesh);
+    }
+
+    addChairWheel(x,y,z){
+        'use strict';
+        geometry = new THREE.TorusGeometry(1.5, 0.3, 8, 8)
+        mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(x, y-23.5, z);
         this.add(mesh);
     }
 
@@ -51,12 +59,16 @@ class Chair extends THREE.Object3D{
 
         material = new THREE.MeshBasicMaterial({ color: 0x45bc8d, wireframe: true });
         
-        this.addChairSeat(0, -11.5, 0);
-        this.addChairBack(0, 9.5, 16.5);  
-        this.addChairLeg(0, -23, 0);
-        this.addChairStandHor(6.5, -34, 0);
-        this.addChairStandHor(-6.5, -34, 0);
-        this.addChairStandVer(0, -34, -5);
-        this.addChairStandVer(0, -34, 5);           
+        this.addChairSeat(0, 0, 0);
+        this.addChairBack(0, 0, 0);  
+        this.addChairLeg(0, 0, 0);
+        this.addChairStandHor(6.5, 0, 0);
+        this.addChairStandHor(-6.5, 0, 0);
+        this.addChairStandVer(0, 0, 6.5);
+        this.addChairStandVer(0, 0, -6.5);
+        this.addChairWheel(0, 0, 0);
+        this.addChairWheel(0, 0, 0);
+        this.addChairWheel(0, 0, 0);
+        this.addChairWheel(0, 0, 0);           
     }
 }
