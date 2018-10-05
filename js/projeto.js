@@ -150,9 +150,17 @@ function onKeyDown(e) {
         camera = camera5;
     case 37: // left  
         chair.children[0].rotateY(Math.PI/75);
+        chair.children[2].rotateY(Math.PI/75);
+        chair.children[3].rotateY(Math.PI/75);
+        chair.children[4].rotateY(Math.PI/75);
+        chair.children[5].rotateY(Math.PI/75);
         break;
     case 39: // right
         chair.children[0].rotateY((-1)*Math.PI/75);
+        chair.children[2].rotateY((-1)*Math.PI/75);
+        chair.children[3].rotateY((-1)*Math.PI/75);
+        chair.children[4].rotateY((-1)*Math.PI/75);
+        chair.children[5].rotateY((-1)*Math.PI/75);
         break;
 
     }

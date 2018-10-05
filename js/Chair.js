@@ -10,9 +10,13 @@ class Chair extends THREE.Object3D{
         this.add(new ChairBottom(0,0,0));
     }
 
-    addChairWheels(x, y, z) {
+    addChairWheel(x,y,z){
         'use strict';
-        this.add(new ChairWheels(0,0,0));
+        geometry = new THREE.TorusGeometry(1.5, 0.3, 8, 8)
+        mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(x, y-23.5, z);
+        mesh.rotation.y = Math.PI / 2;
+        this.add(mesh);
     }
 
     constructor(x, y, z){
@@ -28,7 +32,10 @@ class Chair extends THREE.Object3D{
         
         this.addChairTop(0,0,0);
         this.addChairBottom(0,0,0);
-        this.addChairWheels(0,0,0);
+        this.addChairWheel(10,0,0);
+        this.addChairWheel(-10,0,0);
+        this.addChairWheel(0,0,10);
+        this.addChairWheel(0,0,-10);
     }
 }
 
@@ -107,31 +114,4 @@ class ChairBottom extends THREE.Object3D{
         mesh.position.set(x, y-20.5, z);
         this.add(mesh);
     }    
-}
-
-class ChairWheels extends THREE.Object3D{
-    constructor(x, y, z){
-        super();
-
-        this.position.x = x;
-        this.position.y = y;
-        this.position.z = z;
-    
-        'use strict';
-
-        material = new THREE.MeshBasicMaterial({ color: 0x45bc8d, wireframe: true });
-        
-        this.addChairWheel(10,0,0);
-        this.addChairWheel(-10,0,0);
-        this.addChairWheel(0,0,10);
-        this.addChairWheel(0,0,-10);
-    }
-
-    addChairWheel(x,y,z){
-        'use strict';
-        geometry = new THREE.TorusGeometry(1.5, 0.3, 8, 8)
-        mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(x, y-23.5, z);
-        this.add(mesh);
-    }
 }
