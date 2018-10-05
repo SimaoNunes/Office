@@ -126,6 +126,14 @@ function createCamera5() {
 function onKeyDown(e) {
     'use strict';
     switch (e.keyCode) {
+    case 65: //A
+    case 97: //a
+        scene.traverse(function (node) {
+            if (node instanceof THREE.Mesh) {
+                node.material.wireframe = !node.material.wireframe;
+            }
+        });
+        break;
     case 49: //1
         camera = camera1; 
         break;
@@ -141,10 +149,10 @@ function onKeyDown(e) {
     case 53: // 5
         camera = camera5;
     case 37: // left  
-        chair.rotateY(Math.PI/100);
+        chair.children[0].rotateY(Math.PI/75);
         break;
     case 39: // right
-        chair.rotateY((-1)*Math.PI/100);
+        chair.children[0].rotateY((-1)*Math.PI/75);
         break;
 
     }

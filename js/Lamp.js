@@ -24,7 +24,6 @@ class Lamp extends THREE.Object3D{
         this.add(mesh);
     }
    
-
     constructor(x, y, z){
         super();
 
@@ -39,6 +38,5 @@ class Lamp extends THREE.Object3D{
         this.addLampBase(0, 0, 0);
         this.addLampTorso(0, 0, 0);
         this.addLampHead(0, 0, 0)
-
     }
 }
