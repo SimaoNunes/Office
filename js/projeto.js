@@ -76,10 +76,10 @@ function onKeyDown(e) {
         camera.position.y = 5;
         camera.position.z = 30;
     case 37: // left  
-        chair.rotateY(3.14/100);
+        chair.rotateY((-1)*3.14/100);
         break;
     case 39: // right
-        chair.rotateY((-1)*3.14/100);
+        chair.rotateY(3.14/100);
         break;
 
     }
