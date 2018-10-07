@@ -8,9 +8,9 @@ var geometry, material, mesh;
 
 var table, chair, lamp;
 
-var direction;
+var direction, directionalAxis, angle;
 
-var turnLeft, turnRight = false;
+var turnLeft, turnRight, goUp, goDown = false;
 
 function onResize() {
     'use strict';
@@ -161,13 +161,11 @@ function onKeyDown(e) {
         break;
     
     case 38:   //up
-        chair.position.x +=  direction.getComponent(0);
-        chair.position.z +=  direction.getComponent(0);
+        goUp = true;
         break;
     
     case 40:   //down
-        chair.position.x -=  direction.getComponent(0);
-        chair.position.z -=  direction.getComponent(0);
+        goDown = true;
         break;
     }
 }
@@ -204,15 +202,11 @@ function onKeyUp(e) {
     case 39: // right
         turnRight = false;
         break;
-    
-    case 38:   //up
-        chair.position.x +=  direction.getComponent(0);
-        chair.position.z +=  direction.getComponent(2);
+    case 38:
+        goUp = false;
         break;
-    
-    case 40:   //down
-        chair.position.x -=  direction.getComponent(0);
-        chair.position.z -=  direction.getComponent(2);
+    case 40:
+        goDown = false;
         break;
     }
 }
@@ -231,8 +225,12 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    direction = new THREE.Vector3(0,0,-1);
+    
+    direction       = new THREE.Vector3(0,0,-1);
+    directionalAxis = new THREE.Vector3(0,1,0);
+    angle           = Math.PI / 75;
 
+    
     createScene();
 
     render();
@@ -252,6 +250,7 @@ function animate() {
         chair.children[3].rotateY(Math.PI/75);
         chair.children[4].rotateY(Math.PI/75);
         chair.children[5].rotateY(Math.PI/75);
+        direction.applyAxisAngle( directionalAxis, angle );
     }
 
     if(turnRight == true){
@@ -260,6 +259,17 @@ function animate() {
         chair.children[3].rotateY((-1)*Math.PI/75);
         chair.children[4].rotateY((-1)*Math.PI/75);
         chair.children[5].rotateY((-1)*Math.PI/75);
+        direction.applyAxisAngle( directionalAxis, -angle );
+    }
+
+    if(goUp == true){
+        chair.position.x +=  direction.getComponent(0);
+        chair.position.z +=  direction.getComponent(2);
+    }
+
+    if(goDown == true){
+        chair.position.x -=  direction.getComponent(0);
+        chair.position.z -=  direction.getComponent(2);
     }
 
     render();
