@@ -10,6 +10,8 @@ var table, chair, lamp;
 
 var direction;
 
+var turnLeft, turnRight = false;
+
 function onResize() {
     'use strict';
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -151,23 +153,56 @@ function onKeyDown(e) {
     case 53: // 5
         camera = camera5;
         break;
-    case 37: // left  
-        chair.children[0].rotateY(Math.PI/75);
-        chair.children[2].rotateY(Math.PI/75);
-        chair.children[3].rotateY(Math.PI/75);
-        chair.children[4].rotateY(Math.PI/75);
-        chair.children[5].rotateY(Math.PI/75);
-        var axis = new THREE.Vector3(0,1,0);
-        var angle = Math.PI / 2;
-        direction.applyAxisAngle( axis, angle );
+    case 37: // left
+        turnLeft = true;
         break;
     case 39: // right
-        chair.children[0].rotateY((-1)*Math.PI/75);
-        chair.children[2].rotateY((-1)*Math.PI/75);
-        chair.children[3].rotateY((-1)*Math.PI/75);
-        chair.children[4].rotateY((-1)*Math.PI/75);
-        chair.children[5].rotateY((-1)*Math.PI/75);
-        direction.rotateY((-1)*Math.PI/75);
+        turnRight = true;
+        break;
+    
+    case 38:   //up
+        chair.position.x +=  direction.getComponent(0);
+        chair.position.z +=  direction.getComponent(0);
+        break;
+    
+    case 40:   //down
+        chair.position.x -=  direction.getComponent(0);
+        chair.position.z -=  direction.getComponent(0);
+        break;
+    }
+}
+
+function onKeyUp(e) {
+    'use strict';
+    switch (e.keyCode) {
+    case 65: //A
+    case 97: //a
+        scene.traverse(function (node) {
+            if (node instanceof THREE.Mesh) {
+                node.material.wireframe = !node.material.wireframe;
+            }
+        });
+        break;
+    case 49: //1
+        camera = camera1; 
+        break;
+    case 50: //2
+        camera = camera2; 
+        break;
+    case 51: //3
+        camera = camera3;
+        break;    
+    case 52: //4
+        camera = camera4; 
+        break; 
+    case 53: // 5
+        camera = camera5;
+        break;
+    case 37: // left
+        turnLeft = false;
+        break;
+    case 39: // right
+        turnRight = false;
         break;
     
     case 38:   //up
@@ -204,11 +239,28 @@ function init() {
 
     window.addEventListener("resize", onResize);
     window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
     
 }
 
 function animate() {
     'use strict';
+
+    if(turnLeft == true){
+        chair.children[0].rotateY(Math.PI/75);
+        chair.children[2].rotateY(Math.PI/75);
+        chair.children[3].rotateY(Math.PI/75);
+        chair.children[4].rotateY(Math.PI/75);
+        chair.children[5].rotateY(Math.PI/75);
+    }
+
+    if(turnRight == true){
+        chair.children[0].rotateY((-1)*Math.PI/75);
+        chair.children[2].rotateY((-1)*Math.PI/75);
+        chair.children[3].rotateY((-1)*Math.PI/75);
+        chair.children[4].rotateY((-1)*Math.PI/75);
+        chair.children[5].rotateY((-1)*Math.PI/75);
+    }
 
     render();
 
