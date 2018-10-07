@@ -12,7 +12,7 @@ var direction, directionalAxis, angle;
 
 var turnLeft, turnRight = false;
 
-var vcc, newVcc, vccMax, vccMin, acc, accelerating = false;
+var vcc, newVcc, vccMax, vccMin, acc, accelerating;
 
 var delta;
 
@@ -167,18 +167,11 @@ function onKeyDown(e) {
     case 39: // right
         turnRight = true;
         break;
-    
-    case 38:   //up
-<<<<<<< HEAD
+    case 38: // up
         acc = 1;
         accelerating = true;
-=======
-        goUp = true;
-        audio.play();
->>>>>>> 1532fcafc8a767965801eb512dac0b16be44f286
         break;
-    
-    case 40:   //down
+    case 40: // down
         acc = -1;
         accelerating = true;
         break;
@@ -194,17 +187,11 @@ function onKeyUp(e) {
     case 39: // right
         turnRight = false;
         break;
-    case 38:
-<<<<<<< HEAD
+    case 38: // up
         acc = -1;
         accelerating = false;
-=======
-        goUp = false;
-        audio.pause();
-        audio.currentTime=0;
->>>>>>> 1532fcafc8a767965801eb512dac0b16be44f286
         break;
-    case 40:
+    case 40: // down
         acc = 1;
         accelerating = false;
         break;
@@ -223,6 +210,7 @@ function init() {
     vccMax = 1;
     vccMin = -1;
     acc = 0;
+    accelerating = false;
 
     clock = new THREE.Clock();
     renderer = new THREE.WebGLRenderer({
@@ -254,8 +242,24 @@ function animate() {
 
     newVcc = vcc + acc*(delta);
 
-    if(newVcc < vccMax && newVcc > vccMin)
+    if(accelerating == true && newVcc < vccMax && newVcc > vccMin)
         vcc = newVcc;
+
+    else if(accelerating == false && acc == 1 && newVcc < 0)
+        vcc = newVcc;
+
+    else if(accelerating == false && acc == 1 && newVcc >= 0){
+        vcc = 0
+        acc = 0;
+    }
+
+    else if(accelerating == false && acc == -1 && newVcc > 0)
+        vcc = newVcc;
+    
+    else if(accelerating == false && acc == -1 && newVcc <= 0){
+        vcc = 0
+        acc = 0;
+    }
 
     chair.position.x += vcc * direction.getComponent(0);
     chair.position.z += vcc * direction.getComponent(2);
