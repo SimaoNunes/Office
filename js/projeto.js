@@ -8,11 +8,11 @@ var geometry, material, mesh;
 
 var table, chair, lamp;
 
-var direction, directionalAxis, angle;
+var chairDirection, directionalAxisY, wheelsDirection, directionalAxisX, angle;
 
 var turnLeft, turnRight = false;
 
-var vcc, newVcc, vccMax, vccMin, acc, accelerating = false;
+var vcc, newVcc, vccMax, vccMin, acc, accelerating;
 
 var delta;
 
@@ -172,8 +172,7 @@ function onKeyDown(e) {
         acc = 1;
         accelerating = true;
         break;
-    
-    case 40:   //down
+    case 40: // down
         acc = -1;
         accelerating = true;
         break;
@@ -193,7 +192,7 @@ function onKeyUp(e) {
         acc = -1;
         accelerating = false;
         break;
-    case 40:
+    case 40: // down
         acc = 1;
         accelerating = false;
         break;
@@ -212,6 +211,7 @@ function init() {
     vccMax = 1;
     vccMin = -1;
     acc = 0;
+    accelerating = false;
 
     clock = new THREE.Clock();
     renderer = new THREE.WebGLRenderer({
@@ -221,8 +221,12 @@ function init() {
     document.body.appendChild(renderer.domElement);
 
     
-    direction       = new THREE.Vector3(0,0,-1);
-    directionalAxis = new THREE.Vector3(0,1,0);
+    chairDirection   = new THREE.Vector3(0,0,-1);
+    directionalAxisY = new THREE.Vector3(0,1,0);
+
+    wheelsDirection  = new THREE.Vector3(1,0,0);
+    directionalAxisX = new THREE.Vector3(1,0,0);
+
     angle           = Math.PI / 75;
 
     
@@ -243,11 +247,30 @@ function animate() {
 
     newVcc = vcc + acc*(delta);
 
-    if(newVcc < vccMax && newVcc > vccMin)
+    if(accelerating == true && newVcc < vccMax && newVcc > vccMin)
         vcc = newVcc;
 
-    chair.position.x += vcc * direction.getComponent(0);
-    chair.position.z += vcc * direction.getComponent(2);
+    else if(accelerating == false && acc == 1 && newVcc < 0)
+        vcc = newVcc;
+
+    else if(accelerating == false && acc == 1 && newVcc >= 0){
+        vcc = 0
+        acc = 0;
+    }
+
+    else if(accelerating == false && acc == -1 && newVcc > 0)
+        vcc = newVcc;
+    
+    else if(accelerating == false && acc == -1 && newVcc <= 0){
+        vcc = 0
+        acc = 0;
+    }
+
+    chair.position.x += vcc * chairDirection.getComponent(0);
+    chair.position.z += vcc * chairDirection.getComponent(2);
+    wheelsDirection.applyAxisAngle( directionalAxisX, angle );
+    wheelsDirection.applyAxisAngle( directionalAxisY, -angle );
+
 
     if(turnLeft == true){
         chair.children[0].rotateY(Math.PI/75);
@@ -255,7 +278,7 @@ function animate() {
         chair.children[3].rotateY(Math.PI/75);
         chair.children[4].rotateY(Math.PI/75);
         chair.children[5].rotateY(Math.PI/75);
-        direction.applyAxisAngle( directionalAxis, angle );
+        chairDirection.applyAxisAngle( directionalAxisY, angle );
     }
 
     if(turnRight == true){
@@ -264,7 +287,7 @@ function animate() {
         chair.children[3].rotateY((-1)*Math.PI/75);
         chair.children[4].rotateY((-1)*Math.PI/75);
         chair.children[5].rotateY((-1)*Math.PI/75);
-        direction.applyAxisAngle( directionalAxis, -angle );
+        chairDirection.applyAxisAngle( directionalAxisY, -angle );
     }
 
     render();
