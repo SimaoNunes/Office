@@ -167,7 +167,8 @@ function onKeyDown(e) {
     case 39: // right
         turnRight = true;
         break;
-    case 38: // up
+    
+    case 38:   //up
         acc = 1;
         accelerating = true;
         break;
@@ -187,7 +188,7 @@ function onKeyUp(e) {
     case 39: // right
         turnRight = false;
         break;
-    case 38: // up
+    case 38:
         acc = -1;
         accelerating = false;
         break;
