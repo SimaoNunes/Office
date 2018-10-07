@@ -8,6 +8,8 @@ var geometry, material, mesh;
 
 var table, chair, lamp;
 
+var direction;
+
 function onResize() {
     'use strict';
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -155,6 +157,9 @@ function onKeyDown(e) {
         chair.children[3].rotateY(Math.PI/75);
         chair.children[4].rotateY(Math.PI/75);
         chair.children[5].rotateY(Math.PI/75);
+        var axis = new THREE.Vector3(0,1,0);
+        var angle = Math.PI / 2;
+        direction.applyAxisAngle( axis, angle );
         break;
     case 39: // right
         chair.children[0].rotateY((-1)*Math.PI/75);
@@ -162,8 +167,18 @@ function onKeyDown(e) {
         chair.children[3].rotateY((-1)*Math.PI/75);
         chair.children[4].rotateY((-1)*Math.PI/75);
         chair.children[5].rotateY((-1)*Math.PI/75);
+        direction.rotateY((-1)*Math.PI/75);
         break;
-
+    
+    case 38:   //up
+        chair.position.x +=  direction.getComponent(0);
+        chair.position.z +=  direction.getComponent(0);
+        break;
+    
+    case 40:   //down
+        chair.position.x -=  direction.getComponent(0);
+        chair.position.z -=  direction.getComponent(0);
+        break;
     }
 }
 
@@ -180,6 +195,8 @@ function init() {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
+
+    direction = new THREE.Vector3(0,0,-1);
 
     createScene();
 
