@@ -8,7 +8,7 @@ var geometry, material, mesh;
 
 var table, chair, lamp;
 
-var direction, directionalAxis, angle;
+var direction, directionalAxis, angle, angleSum;
 
 var turnLeft, turnRight = false;
 
@@ -220,9 +220,10 @@ function init() {
     document.body.appendChild(renderer.domElement);
 
     
-    direction       = new THREE.Vector3(0,0,-1);
-    directionalAxis = new THREE.Vector3(0,1,0);
-    angle           = Math.PI / 75;
+    direction           = new THREE.Vector3(0,0,-1);
+    directionalAxis     = new THREE.Vector3(0,1,0);
+    angle               = Math.PI / 75;
+    angleSum            = 0;
 
     
     createScene();
@@ -242,43 +243,48 @@ function animate() {
 
     newVcc = vcc + acc*(delta);
 
-    if(accelerating == true && newVcc < vccMax && newVcc > vccMin)
+    if(accelerating == true && newVcc < vccMax && newVcc > vccMin){
         vcc = newVcc;
-
-    else if(accelerating == false && acc == 1 && newVcc < 0)
-        vcc = newVcc;
-
-    else if(accelerating == false && acc == 1 && newVcc >= 0){
-        vcc = 0
-        acc = 0;
     }
 
-    else if(accelerating == false && acc == -1 && newVcc > 0)
-        vcc = newVcc;
-    
-    else if(accelerating == false && acc == -1 && newVcc <= 0){
-        vcc = 0
-        acc = 0;
+    else if(accelerating == false){
+        if(acc == 1 && newVcc < 0){
+            vcc = newVcc;
+        }
+        if(acc == 1 && newVcc >= 0){
+            vcc = 0
+            acc = 0;
+        }
+        if(acc == -1 && newVcc > 0){
+            vcc = newVcc;
+        }
+        if(acc == -1 && newVcc <= 0){
+            vcc = 0
+            acc = 0;
+        }
     }
 
-    chair.position.x += vcc * direction.getComponent(0);
-    chair.position.z += vcc * direction.getComponent(2);
+    if(vcc!=0){
+        chair.position.x += vcc * direction.getComponent(0);
+        chair.position.z += vcc * direction.getComponent(2);
+        chair.children[2].rotateY(angleSum);
+        chair.children[3].rotateY(angleSum);
+        chair.children[4].rotateY(angleSum);
+        chair.children[5].rotateY(angleSum);
+        angleSum = 0;
+    }
+
+
 
     if(turnLeft == true){
-        chair.children[0].rotateY(Math.PI/75);
-        chair.children[2].rotateY(Math.PI/75);
-        chair.children[3].rotateY(Math.PI/75);
-        chair.children[4].rotateY(Math.PI/75);
-        chair.children[5].rotateY(Math.PI/75);
+        chair.children[0].rotateY(angle);
+        angleSum += angle;
         direction.applyAxisAngle( directionalAxis, angle );
     }
 
     if(turnRight == true){
-        chair.children[0].rotateY((-1)*Math.PI/75);
-        chair.children[2].rotateY((-1)*Math.PI/75);
-        chair.children[3].rotateY((-1)*Math.PI/75);
-        chair.children[4].rotateY((-1)*Math.PI/75);
-        chair.children[5].rotateY((-1)*Math.PI/75);
+        chair.children[0].rotateY(-angle);
+        angleSum -= angle;
         direction.applyAxisAngle( directionalAxis, -angle );
     }
 
