@@ -57,8 +57,8 @@ function createCamera1() {
         window.innerWidth/ 10,
         (window.innerHeight / 10) - 10,
         (window.innerHeight / - 10) - 10,
-        -200,
-        200
+        -1000,
+        1000
     );
     
     camera1.position.x = 0;
@@ -73,8 +73,8 @@ function createCamera2() {
         window.innerWidth/ 10,
         (window.innerHeight / 10) + 50,
         (window.innerHeight / - 10) + 50,
-        -200,
-        200
+        -1000,
+        1000
     );
     
     camera2.position.x = 0;
@@ -89,8 +89,8 @@ function createCamera3() {
         window.innerWidth/ 10,
         (window.innerHeight / 10) + 50,
         (window.innerHeight / - 10) + 50,
-        -200,
-        200
+        -1000,
+        1000
     );
     
     camera3.position.x = 30;
@@ -105,8 +105,8 @@ function createCamera4() {
         window.innerWidth/ 10,
         (window.innerHeight / 10) + 50,
         (window.innerHeight / - 10) + 50,
-        -200,
-        200
+        -1000,
+        1000
     );
     
     camera4.position.x = 30;
@@ -121,8 +121,8 @@ function createCamera5() {
         window.innerWidth/ 10,
         (window.innerHeight / 10) + 50,
         (window.innerHeight / - 10) + 50,
-        -200,
-        200
+        -1000,
+        1000
     );
     
     camera5.position.x = 30;
@@ -178,29 +178,6 @@ function onKeyDown(e) {
 function onKeyUp(e) {
     'use strict';
     switch (e.keyCode) {
-    case 65: //A
-    case 97: //a
-        scene.traverse(function (node) {
-            if (node instanceof THREE.Mesh) {
-                node.material.wireframe = !node.material.wireframe;
-            }
-        });
-        break;
-    case 49: //1
-        camera = camera1; 
-        break;
-    case 50: //2
-        camera = camera2; 
-        break;
-    case 51: //3
-        camera = camera3;
-        break;    
-    case 52: //4
-        camera = camera4; 
-        break; 
-    case 53: // 5
-        camera = camera5;
-        break;
     case 37: // left
         turnLeft = false;
         break;
@@ -270,13 +247,13 @@ function animate() {
     }
 
     if(goUp == true){
-        chair.position.x +=  direction.getComponent(0);
-        chair.position.z +=  direction.getComponent(2);
+        chair.position.x += direction.getComponent(0);
+        chair.position.z += direction.getComponent(2);
     }
 
     if(goDown == true){
-        chair.position.x -=  direction.getComponent(0);
-        chair.position.z -=  direction.getComponent(2);
+        chair.position.x -= direction.getComponent(0);
+        chair.position.z -= direction.getComponent(2);
     }
 
     render();
