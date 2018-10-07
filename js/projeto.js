@@ -207,12 +207,12 @@ function onKeyUp(e) {
     
     case 38:   //up
         chair.position.x +=  direction.getComponent(0);
-        chair.position.z +=  direction.getComponent(0);
+        chair.position.z +=  direction.getComponent(2);
         break;
     
     case 40:   //down
         chair.position.x -=  direction.getComponent(0);
-        chair.position.z -=  direction.getComponent(0);
+        chair.position.z -=  direction.getComponent(2);
         break;
     }
 }
