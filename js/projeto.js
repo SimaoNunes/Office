@@ -12,6 +12,10 @@ var direction, directionalAxis, angle;
 
 var turnLeft, turnRight, goUp, goDown = false;
 
+var audio = new Audio('engine.mp3');
+
+
+
 function onResize() {
     'use strict';
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -162,6 +166,7 @@ function onKeyDown(e) {
     
     case 38:   //up
         goUp = true;
+        audio.play();
         break;
     
     case 40:   //down
@@ -204,6 +209,8 @@ function onKeyUp(e) {
         break;
     case 38:
         goUp = false;
+        audio.pause();
+        audio.currentTime=0;
         break;
     case 40:
         goDown = false;
