@@ -1,6 +1,6 @@
 /*Primeira entrega, Cena Simples Interativa com Câmara Fixa*/
 
-var camera, scene, renderer;
+var camera, scene, renderer, clock;
 
 var camera1, camera2, camera3, camera4, camera5;
 
@@ -10,7 +10,11 @@ var table, chair, lamp;
 
 var direction, directionalAxis, angle;
 
-var turnLeft, turnRight, goUp, goDown = false;
+var turnLeft, turnRight = false;
+
+var vcc, newVcc, vccMax, vccMin, acc, accelerating = false;
+
+var delta;
 
 function onResize() {
     'use strict';
@@ -161,11 +165,13 @@ function onKeyDown(e) {
         break;
     
     case 38:   //up
-        goUp = true;
+        acc = 1;
+        accelerating = true;
         break;
     
     case 40:   //down
-        goDown = true;
+        acc = -1;
+        accelerating = true;
         break;
     }
 }
@@ -180,10 +186,12 @@ function onKeyUp(e) {
         turnRight = false;
         break;
     case 38:
-        goUp = false;
+        acc = -1;
+        accelerating = false;
         break;
     case 40:
-        goDown = false;
+        acc = 1;
+        accelerating = false;
         break;
     }
 }
@@ -196,6 +204,12 @@ function render() {
 
 function init() {
     'use strict';
+    vcc = 0;
+    vccMax = 1;
+    vccMin = -1;
+    acc = 0;
+
+    clock = new THREE.Clock();
     renderer = new THREE.WebGLRenderer({
         antialias: true
     });
@@ -221,6 +235,16 @@ function init() {
 function animate() {
     'use strict';
 
+    delta = clock.getDelta();
+
+    newVcc = vcc + acc*(delta);
+
+    if(newVcc < vccMax && newVcc > vccMin)
+        vcc = newVcc;
+
+    chair.position.x += vcc * direction.getComponent(0);
+    chair.position.z += vcc * direction.getComponent(2);
+
     if(turnLeft == true){
         chair.children[0].rotateY(Math.PI/75);
         chair.children[2].rotateY(Math.PI/75);
@@ -237,16 +261,6 @@ function animate() {
         chair.children[4].rotateY((-1)*Math.PI/75);
         chair.children[5].rotateY((-1)*Math.PI/75);
         direction.applyAxisAngle( directionalAxis, -angle );
-    }
-
-    if(goUp == true){
-        chair.position.x += direction.getComponent(0);
-        chair.position.z += direction.getComponent(2);
-    }
-
-    if(goDown == true){
-        chair.position.x -= direction.getComponent(0);
-        chair.position.z -= direction.getComponent(2);
     }
 
     render();
