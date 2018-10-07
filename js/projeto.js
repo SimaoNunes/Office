@@ -16,6 +16,10 @@ var vcc, newVcc, vccMax, vccMin, acc, accelerating = false;
 
 var delta;
 
+var audio = new Audio('engine.mp3');
+
+
+
 function onResize() {
     'use strict';
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -165,8 +169,13 @@ function onKeyDown(e) {
         break;
     
     case 38:   //up
+<<<<<<< HEAD
         acc = 1;
         accelerating = true;
+=======
+        goUp = true;
+        audio.play();
+>>>>>>> 1532fcafc8a767965801eb512dac0b16be44f286
         break;
     
     case 40:   //down
@@ -186,8 +195,14 @@ function onKeyUp(e) {
         turnRight = false;
         break;
     case 38:
+<<<<<<< HEAD
         acc = -1;
         accelerating = false;
+=======
+        goUp = false;
+        audio.pause();
+        audio.currentTime=0;
+>>>>>>> 1532fcafc8a767965801eb512dac0b16be44f286
         break;
     case 40:
         acc = 1;
