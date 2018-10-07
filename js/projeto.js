@@ -158,7 +158,7 @@ function onKeyDown(e) {
         chair.children[4].rotateY(Math.PI/75);
         chair.children[5].rotateY(Math.PI/75);
         var axis = new THREE.Vector3(0,1,0);
-        var angle = Math.PI / 2;
+        var angle = Math.PI / 75;
         direction.applyAxisAngle( axis, angle );
         break;
     case 39: // right
@@ -167,17 +167,19 @@ function onKeyDown(e) {
         chair.children[3].rotateY((-1)*Math.PI/75);
         chair.children[4].rotateY((-1)*Math.PI/75);
         chair.children[5].rotateY((-1)*Math.PI/75);
-        direction.rotateY((-1)*Math.PI/75);
+        var axis = new THREE.Vector3(0,1,0);
+        var angle = (-1)*Math.PI / 75;
+        direction.applyAxisAngle( axis, angle );
         break;
     
     case 38:   //up
         chair.position.x +=  direction.getComponent(0);
-        chair.position.z +=  direction.getComponent(0);
+        chair.position.z +=  direction.getComponent(2);
         break;
     
     case 40:   //down
         chair.position.x -=  direction.getComponent(0);
-        chair.position.z -=  direction.getComponent(0);
+        chair.position.z -=  direction.getComponent(2);
         break;
     }
 }
