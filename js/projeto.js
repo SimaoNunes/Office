@@ -163,8 +163,7 @@ function onKeyDown(e) {
     case 39: // right
         turnRight = true;
         break;
-    
-    case 38:   //up
+    case 38:  //up
         acc = 1;
         accelerating = true;
         break;
@@ -184,7 +183,7 @@ function onKeyUp(e) {
     case 39: // right
         turnRight = false;
         break;
-    case 38:
+    case 38:  //up
         acc = -1;
         accelerating = false;
         break;
@@ -219,6 +218,7 @@ function init() {
     
     direction           = new THREE.Vector3(0,0,-1);
     directionalAxis     = new THREE.Vector3(0,1,0);
+
     angle               = Math.PI / 75;
     angleSum            = 0;
 
@@ -248,14 +248,14 @@ function animate() {
             vcc = newVcc;
         }
         if(acc == 1 && newVcc >= 0){
-            vcc = 0
+            vcc = 0;
             acc = 0;
         }
         if(acc == -1 && newVcc > 0){
             vcc = newVcc;
         }
         if(acc == -1 && newVcc <= 0){
-            vcc = 0
+            vcc = 0;
             acc = 0;
         }
     }
@@ -269,8 +269,6 @@ function animate() {
         chair.children[5].rotateY(angleSum);
         angleSum = 0;
     }
-
-
 
     if(turnLeft == true){
         chair.children[0].rotateY(angle);
