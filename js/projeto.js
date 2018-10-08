@@ -16,9 +16,6 @@ var vcc, newVcc, vccMax, vccMin, acc, accelerating; // variaveis relativas ao mo
 
 var delta; // variavel relativa a passagem do tempo
 
-var objectList;
-
-
 function onResize() {
     'use strict';
     renderer.setSize(window.innerWidth, window.innerHeight);
