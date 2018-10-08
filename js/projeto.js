@@ -1,20 +1,22 @@
 /*Primeira entrega, Cena Simples Interativa com Câmara Fixa*/
 
-var camera, scene, renderer, clock;
+var camera, scene, renderer, clock; // variaveis gerais relativas a animacao
 
-var camera1, camera2, camera3, camera4, camera5;
+var camera1, camera2, camera3, camera4, camera5; // diferentes tipos de cameras
 
 var geometry, material, mesh;
 
-var table, chair, lamp;
+var table, chair, lamp; // diferentes objetos a desenhar
 
-var direction, directionalAxis, angle, angleSum;
+var direction, directionalAxis, angle, angleSum; // variaveis relativas a rotacao da cadeira
 
 var turnLeft, turnRight = false;
 
-var vcc, newVcc, vccMax, vccMin, acc, accelerating;
+var vcc, newVcc, vccMax, vccMin, acc, accelerating; // variaveis relativas ao andamento da cadeira
 
-var delta;
+var delta; // variavel relativa a passagem do tempo
+
+var objectList;
 
 var audio = new Audio('engine.mp3');
 
@@ -233,8 +235,7 @@ function init() {
 
     window.addEventListener("resize", onResize);
     window.addEventListener("keydown", onKeyDown);
-    window.addEventListener("keyup", onKeyUp);
-    
+    window.addEventListener("keyup", onKeyUp);    
 }
 
 function animate() {
