@@ -52,6 +52,7 @@ class ChairTop extends THREE.Object3D{
         material = new THREE.MeshBasicMaterial({ color: 0x45bc8d, wireframe: true });
         
         this.addChairSeat(0,0,0);
+        this.addChairSeat(0,0,0);
         this.addChairBack(0,0,0);
     }
 

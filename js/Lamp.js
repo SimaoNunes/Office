@@ -23,6 +23,15 @@ class Lamp extends THREE.Object3D{
         mesh.position.set(x, y+63, z);
         this.add(mesh);
     }
+
+
+    addLampBall(x, y, z){
+        'use strict';
+        var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+        mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(x, y+63, z);
+        this.add( mesh );
+    }
    
     constructor(x, y, z){
         super();
@@ -37,6 +46,8 @@ class Lamp extends THREE.Object3D{
 
         this.addLampBase(0, 0, 0);
         this.addLampTorso(0, 0, 0);
-        this.addLampHead(0, 0, 0)
+        this.addLampHead(0, 0, 0);
+        this.addLampBall(0, 0, 0);
+        this.addLampBall(0, 0, 0);
     }
 }
