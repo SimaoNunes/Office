@@ -12,14 +12,11 @@ var direction, directionalAxis, angle, angleSum; // variaveis relativas a rotaca
 
 var turnLeft, turnRight = false;
 
-var vcc, newVcc, vccMax, vccMin, acc, accelerating; // variaveis relativas ao andamento da cadeira
+var vcc, newVcc, vccMax, vccMin, acc, accelerating; // variaveis relativas ao movimento da cadeira
 
 var delta; // variavel relativa a passagem do tempo
 
 var objectList;
-
-var audio = new Audio('engine.mp3');
-
 
 
 function onResize() {
