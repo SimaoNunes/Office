@@ -248,7 +248,7 @@ function animate() {
             vcc = newVcc;
         }
         if(acc == 1 && newVcc >= 0){
-            vcc = 0;
+            vcc = 0
             acc = 0;
         }
         if(acc == -1 && newVcc > 0){
@@ -269,6 +269,8 @@ function animate() {
         chair.children[5].rotateY(angleSum);
         angleSum = 0;
     }
+
+
 
     if(turnLeft == true){
         chair.children[0].rotateY(angle);
