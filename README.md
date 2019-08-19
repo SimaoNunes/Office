@@ -5,7 +5,7 @@ Source code of [this](http://web.tecnico.ulisboa.pt/~ist186512/projects/office/)
 ## Start the animation
 
 Access the animation through [this](http://web.tecnico.ulisboa.pt/~ist186512/projects/office/) link or download the repo.
-If you downloaded the repo, make sure that there is a browser installed on your computer and start the game by running the HTML file with it.
+If you downloaded the repo, make sure that there is a browser installed on your computer and start the animation by running the HTML file with it.
 
 ## Instructions
 
